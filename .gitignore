@@ -6,3 +6,4 @@ work/gemma-3
 work/gemma-3-finance
 work/gemma-3-finance-finetune
 work/*.png
+mlflow

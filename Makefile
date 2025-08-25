@@ -8,6 +8,7 @@ help: ## Show this help
 export
 NOW = $(shell date '+%Y%m%d-%H%M%S')
 
+
 #######################################################################################################################
 # jupyter
 #######################################################################################################################
@@ -32,6 +33,7 @@ ps-jupyter: ## Status jupyter.
 
 log-jupyter: ## Log jupyter.
 	docker logs -f jupyter || :
+
 
 #######################################################################################################################
 # vllm
@@ -78,3 +80,27 @@ test-vllm-chat: ## test-vllm-chat
 		--url http://localhost:8000/v1/chat/completions \
 		--data @./prompt.json | jq .
 
+
+#######################################################################################################################
+# mlflow
+#######################################################################################################################
+MLFLOW_IMAGE_NAME = ghcr.io/mlflow/mlflow
+MLFLOW_IMAGE_TAG = v3.3.1
+
+up-mlflow: ## Start mlflow.
+	docker run -d --name mlflow -p 10000:8000 \
+		--shm-size=16g \
+		-v $(shell pwd)/mlflow:/mlruns \
+		$(MLFLOW_IMAGE_NAME):$(MLFLOW_IMAGE_TAG) \
+		mlflow server \
+		--host 0.0.0.0 --port 8000
+
+down-mlflow: ## Stop mlflow.
+	docker stop mlflow || :
+	docker rm mlflow || :
+
+ps-mlflow: ## Status mlflow.
+	docker ps -a -f name=mlflow || :
+
+log-mlflow: ## Log mlflow.
+	docker logs -f mlflow || :
