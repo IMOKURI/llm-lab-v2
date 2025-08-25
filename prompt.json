@@ -1,0 +1,13 @@
+{
+    "model": "gemma-3-finance",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a financial sentiment analysis expert. Your task is to analyze the sentiment expressed in the given financial text.Only reply with positive, neutral, or negative."
+        },
+        {
+            "role": "user",
+            "content": "Adidas signings this year include BMX athlete Kieran Reilly, the Brazilian Skateboarding Federation and the Polish Olympic Committee, although Gulden said its presence in Paris will not be as wide as he would have liked, as Olympics sponsorship contracts run for several years."
+        }
+    ]
+}
